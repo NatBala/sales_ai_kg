@@ -1,0 +1,21 @@
+.env*
+*.log
+node_modules/
+.runtime/
+
+# Private configuration, local state and generated verification reports
+graph-app-connection.json
+*.local.json
+*.sqlite*
+*.db
+*.pid
+work/
+__pycache__/
+*.pyc
+verification.json
+*-verification.json
+
+# Local embedding runtime and downloaded model weights
+embedding-deps/
+embedding-model/
+*.onnx

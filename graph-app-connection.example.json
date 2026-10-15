@@ -1,0 +1,10 @@
+{
+  "http": "http://127.0.0.1:7475",
+  "database": "salesfoundation",
+  "username": "YOUR_NEO4J_READ_ONLY_USER",
+  "password": "REPLACE_LOCALLY_DO_NOT_COMMIT",
+  "port": 8765,
+  "model": "gpt-4.1-mini",
+  "python": "ABSOLUTE_PATH_TO_PYTHON",
+  "openaiKeyFile": "ABSOLUTE_PATH_TO_PRIVATE_ENV_FILE"
+}

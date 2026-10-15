@@ -1,0 +1,756 @@
+{
+  "nodes": {
+    "Firm": [
+      "id",
+      "kind",
+      "name",
+      "source_kind",
+      "tenant_id"
+    ],
+    "Employee": [
+      "dataset",
+      "email",
+      "full_name",
+      "id",
+      "name",
+      "role",
+      "synthetic",
+      "tenant_id",
+      "territory"
+    ],
+    "Advisor": [
+      "channel",
+      "client_segment",
+      "dataset",
+      "email",
+      "firm_name",
+      "first_name",
+      "full_name",
+      "household_count",
+      "id",
+      "last_name",
+      "name",
+      "office_city",
+      "office_state",
+      "preferred_contact_channel",
+      "primary_topic",
+      "source_record_id",
+      "synthetic",
+      "tenant_id",
+      "years_experience"
+    ],
+    "BuyingUnit": [
+      "asset_scope",
+      "grain",
+      "id",
+      "name",
+      "source_record_id",
+      "synthetic",
+      "tenant_id"
+    ],
+    "Platform": [
+      "discretion",
+      "id",
+      "name",
+      "source_kind",
+      "source_record_id",
+      "tenant_id"
+    ],
+    "Fund": [
+      "full_name",
+      "geography",
+      "id",
+      "name",
+      "source_kind",
+      "source_url",
+      "tenant_id",
+      "vehicle",
+      "verified_on"
+    ],
+    "Instrument": [
+      "currency",
+      "id",
+      "name",
+      "share_class",
+      "source_kind",
+      "tenant_id",
+      "ticker"
+    ],
+    "AssetClass": [
+      "id",
+      "name",
+      "scheme",
+      "tenant_id",
+      "version"
+    ],
+    "Category": [
+      "id",
+      "name",
+      "scheme",
+      "tenant_id",
+      "version"
+    ],
+    "Document": [
+      "access_scope",
+      "approval_status",
+      "content_fidelity",
+      "dataset",
+      "id",
+      "name",
+      "source_as_of_status",
+      "source_date",
+      "source_kind",
+      "source_system",
+      "source_uri",
+      "source_url",
+      "synthetic",
+      "tenant_id",
+      "type"
+    ],
+    "DocumentVersion": [
+      "content_hash",
+      "id",
+      "lifecycle",
+      "name",
+      "retrieved_on",
+      "revision",
+      "source_url",
+      "synthetic",
+      "tenant_id"
+    ],
+    "ContentChunk": [
+      "content_hash",
+      "embedded_at",
+      "embedding_dimensions",
+      "embedding_model",
+      "embedding_model_revision",
+      "embedding_status",
+      "id",
+      "locator",
+      "name",
+      "sequence",
+      "source_kind",
+      "synthetic",
+      "tenant_id",
+      "text"
+    ],
+    "Topic": [
+      "id",
+      "name",
+      "scheme",
+      "tenant_id",
+      "version"
+    ],
+    "Statement": [
+      "candidate_transaction_ids",
+      "durable_preference",
+      "effective_from",
+      "extraction_method",
+      "id",
+      "kind",
+      "name",
+      "scope",
+      "source_record_id",
+      "synthetic",
+      "tenant_id",
+      "verification_status"
+    ],
+    "Meeting": [
+      "id",
+      "name",
+      "status",
+      "synthetic",
+      "tenant_id"
+    ],
+    "Interaction": [
+      "channel",
+      "dataset",
+      "duration_minutes",
+      "follow_up_due",
+      "id",
+      "interaction_type",
+      "name",
+      "next_action",
+      "occurred_on",
+      "source_export",
+      "source_record_id",
+      "started_at",
+      "status",
+      "summary",
+      "synthetic",
+      "tenant_id"
+    ]
+  },
+  "relationships": [
+    {
+      "from": "Advisor",
+      "type": "MEMBER_OF",
+      "to": "BuyingUnit",
+      "properties": [
+        "key",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "BuyingUnit",
+      "type": "BELONGS_TO",
+      "to": "Firm",
+      "properties": [
+        "key",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Employee",
+      "type": "COVERS",
+      "to": "BuyingUnit",
+      "properties": [
+        "coverage_from",
+        "key",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Firm",
+      "type": "OFFERS_PLATFORM",
+      "to": "Platform",
+      "properties": [
+        "key",
+        "source_kind",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Instrument",
+      "type": "OF_FUND",
+      "to": "Fund",
+      "properties": [
+        "key",
+        "source_kind",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Firm",
+      "type": "MANAGES",
+      "to": "Fund",
+      "properties": [
+        "key",
+        "source_kind",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Fund",
+      "type": "IN_ASSET_CLASS",
+      "to": "AssetClass",
+      "properties": [
+        "key",
+        "source_as_of",
+        "source_kind",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Fund",
+      "type": "IN_CATEGORY",
+      "to": "Category",
+      "properties": [
+        "key",
+        "source_as_of",
+        "source_kind",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Instrument",
+      "type": "AVAILABLE_ON",
+      "to": "Platform",
+      "properties": [
+        "account_context",
+        "effective_from",
+        "key",
+        "minimum_investment_usd",
+        "source_kind",
+        "source_record_id",
+        "status",
+        "tenant_id",
+        "verification_status"
+      ]
+    },
+    {
+      "from": "BuyingUnit",
+      "type": "POSITION_AS_OF",
+      "to": "Instrument",
+      "properties": [
+        "as_of",
+        "assets_cents",
+        "currency",
+        "key",
+        "label",
+        "serving_window",
+        "source_export",
+        "source_record_id",
+        "source_system",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "BuyingUnit",
+      "type": "FLOW_IN_PERIOD",
+      "to": "Instrument",
+      "properties": [
+        "currency",
+        "key",
+        "label",
+        "net_flow_cents",
+        "period_end",
+        "period_start",
+        "redemptions_cents",
+        "sales_cents",
+        "source_aggregate_id",
+        "source_export",
+        "source_system",
+        "source_transaction_ids",
+        "synthetic",
+        "tenant_id",
+        "transaction_count"
+      ]
+    },
+    {
+      "from": "Advisor",
+      "type": "RESEARCHED",
+      "to": "Fund",
+      "properties": [
+        "first_seen",
+        "identity_basis",
+        "interpretation",
+        "key",
+        "label",
+        "last_seen",
+        "page_views",
+        "period_end",
+        "period_start",
+        "source_aggregate_id",
+        "source_event_ids",
+        "source_export",
+        "synthetic",
+        "tenant_id",
+        "total_seconds"
+      ]
+    },
+    {
+      "from": "Document",
+      "type": "HAS_VERSION",
+      "to": "DocumentVersion",
+      "properties": [
+        "key",
+        "source_kind",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "DocumentVersion",
+      "type": "HAS_CHUNK",
+      "to": "ContentChunk",
+      "properties": [
+        "key",
+        "sequence",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Document",
+      "type": "ABOUT_PRODUCT",
+      "to": "Fund",
+      "properties": [
+        "key",
+        "mention_basis",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "ContentChunk",
+      "type": "MENTIONS",
+      "to": "Fund",
+      "properties": [
+        "key",
+        "mention_basis",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "ContentChunk",
+      "type": "ABOUT_TOPIC",
+      "to": "Topic",
+      "properties": [
+        "assignment_method",
+        "key",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Advisor",
+      "type": "HAD_INTERACTION",
+      "to": "Document",
+      "properties": [
+        "key",
+        "occurred_on",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Advisor",
+      "type": "HAS_STATEMENT",
+      "to": "Statement",
+      "properties": [
+        "key",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Statement",
+      "type": "ABOUT_TOPIC",
+      "to": "Topic",
+      "properties": [
+        "key",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Statement",
+      "type": "SUPPORTED_BY",
+      "to": "ContentChunk",
+      "properties": [
+        "key",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Advisor",
+      "type": "REPORTED_NEED",
+      "to": "Topic",
+      "properties": [
+        "effective_from",
+        "key",
+        "scope",
+        "statement_id",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Advisor",
+      "type": "HAS_MEETING",
+      "to": "Meeting",
+      "properties": [
+        "key",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Meeting",
+      "type": "HAS_TOPIC",
+      "to": "Topic",
+      "properties": [
+        "key",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Statement",
+      "type": "APPLIES_TO",
+      "to": "Meeting",
+      "properties": [
+        "key",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Employee",
+      "type": "COVERS_ADVISOR",
+      "to": "Advisor",
+      "properties": [
+        "assignment_type",
+        "dataset",
+        "effective_from",
+        "key",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Advisor",
+      "type": "VISITED_PAGE",
+      "to": "Document",
+      "properties": [
+        "first_seen",
+        "identity_basis",
+        "key",
+        "label",
+        "last_seen",
+        "period_end",
+        "period_start",
+        "source_aggregate_id",
+        "source_event_ids",
+        "source_export",
+        "synthetic",
+        "tenant_id",
+        "total_seconds",
+        "visit_count"
+      ]
+    },
+    {
+      "from": "Employee",
+      "type": "CONDUCTED",
+      "to": "Interaction",
+      "properties": [
+        "key",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Interaction",
+      "type": "WITH_ADVISOR",
+      "to": "Advisor",
+      "properties": [
+        "key",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Interaction",
+      "type": "DOCUMENTED_IN",
+      "to": "Document",
+      "properties": [
+        "key",
+        "synthetic",
+        "tenant_id"
+      ]
+    },
+    {
+      "from": "Interaction",
+      "type": "ABOUT_TOPIC",
+      "to": "Topic",
+      "properties": [
+        "key",
+        "synthetic",
+        "tenant_id"
+      ]
+    }
+  ],
+  "advisors": [
+    {
+      "id": "ADV-101",
+      "name": "Alex Morgan"
+    },
+    {
+      "id": "ADV-102",
+      "name": "Priya Shah"
+    },
+    {
+      "id": "ADV-103",
+      "name": "Jordan Reed"
+    },
+    {
+      "id": "ADV-104",
+      "name": "Maya Chen"
+    },
+    {
+      "id": "ADV-105",
+      "name": "Daniel Ortiz"
+    },
+    {
+      "id": "ADV-106",
+      "name": "Sofia Bennett"
+    },
+    {
+      "id": "ADV-107",
+      "name": "Ethan Brooks"
+    },
+    {
+      "id": "ADV-108",
+      "name": "Nina Patel"
+    },
+    {
+      "id": "ADV-109",
+      "name": "Owen Carter"
+    },
+    {
+      "id": "ADV-110",
+      "name": "Leah Nguyen"
+    },
+    {
+      "id": "ADV-111",
+      "name": "Victor Ramirez"
+    },
+    {
+      "id": "ADV-112",
+      "name": "Aisha Johnson"
+    },
+    {
+      "id": "ADV-113",
+      "name": "Ben Foster"
+    },
+    {
+      "id": "ADV-114",
+      "name": "Chloe Davis"
+    },
+    {
+      "id": "ADV-115",
+      "name": "Diego Martinez"
+    },
+    {
+      "id": "ADV-116",
+      "name": "Emma Wilson"
+    },
+    {
+      "id": "ADV-117",
+      "name": "Faisal Khan"
+    },
+    {
+      "id": "ADV-118",
+      "name": "Grace Kim"
+    },
+    {
+      "id": "ADV-119",
+      "name": "Henry Taylor"
+    },
+    {
+      "id": "ADV-120",
+      "name": "Isabella Rossi"
+    }
+  ],
+  "funds": [
+    {
+      "id": "FUND:GFA",
+      "code": "GFA",
+      "name": "The Growth Fund of America"
+    },
+    {
+      "id": "FUND:NPF",
+      "code": "NPF",
+      "name": "New Perspective Fund"
+    },
+    {
+      "id": "FUND:BFA",
+      "code": "BFA",
+      "name": "The Bond Fund of America"
+    },
+    {
+      "id": "FUND:CGGR",
+      "code": "CGGR",
+      "name": "Capital Group Growth ETF"
+    },
+    {
+      "id": "FUND:CGUI",
+      "code": "CGUI",
+      "name": "Capital Group Ultra Short Income ETF"
+    },
+    {
+      "id": "FUND:CGIB",
+      "code": "CGIB",
+      "name": "Capital Group International Bond ETF (USD-Hedged)"
+    },
+    {
+      "id": "FUND:CGMM",
+      "code": "CGMM",
+      "name": "Capital Group U.S. Small and Mid Cap ETF"
+    },
+    {
+      "id": "FUND:CGBL",
+      "code": "CGBL",
+      "name": "Capital Group Core Balanced ETF"
+    },
+    {
+      "id": "FUND:CGGO",
+      "code": "CGGO",
+      "name": "Capital Group Global Growth Equity ETF"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC:PRODUCT:GFA",
+      "name": "The Growth Fund of America profile",
+      "type": "PRODUCT_PROFILE"
+    },
+    {
+      "id": "DOC:PRODUCT:NPF",
+      "name": "New Perspective Fund profile",
+      "type": "PRODUCT_PROFILE"
+    },
+    {
+      "id": "DOC:PRODUCT:BFA",
+      "name": "The Bond Fund of America profile",
+      "type": "PRODUCT_PROFILE"
+    },
+    {
+      "id": "DOC:PRODUCT:CGGR",
+      "name": "Capital Group Growth ETF profile",
+      "type": "PRODUCT_PROFILE"
+    },
+    {
+      "id": "DOC:PRODUCT:CGUI",
+      "name": "Capital Group Ultra Short Income ETF profile",
+      "type": "PRODUCT_PROFILE"
+    },
+    {
+      "id": "DOC:PRODUCT:CGIB",
+      "name": "Capital Group International Bond ETF (USD-Hedged) profile",
+      "type": "PRODUCT_PROFILE"
+    },
+    {
+      "id": "DOC:PRODUCT:CGMM",
+      "name": "Capital Group U.S. Small and Mid Cap ETF profile",
+      "type": "PRODUCT_PROFILE"
+    },
+    {
+      "id": "DOC:PRODUCT:CGBL",
+      "name": "Capital Group Core Balanced ETF profile",
+      "type": "PRODUCT_PROFILE"
+    },
+    {
+      "id": "DOC:PRODUCT:CGGO",
+      "name": "Capital Group Global Growth Equity ETF profile",
+      "type": "PRODUCT_PROFILE"
+    },
+    {
+      "id": "DOC:ETF_SHEET",
+      "name": "Capital Group ETFs single sheet",
+      "type": "ARTICLE"
+    },
+    {
+      "id": "DOC:SOPS",
+      "name": "Standardizing roles, responsibilities and procedures",
+      "type": "ARTICLE"
+    },
+    {
+      "id": "DOC:ESTATE",
+      "name": "A practical way to help clients get started on estate planning",
+      "type": "ARTICLE"
+    },
+    {
+      "id": "DOC:MODEL_LINEUP",
+      "name": "Active ETF models at Wells Fargo",
+      "type": "ARTICLE"
+    },
+    {
+      "id": "DOC:MODEL_UPDATE",
+      "name": "May 2025 allocation update: Active ETF model portfolios",
+      "type": "ARTICLE"
+    },
+    {
+      "id": "DOC:OUTLOOK",
+      "name": "Stock market outlook: 3 themes for the second half of 2026",
+      "type": "ARTICLE"
+    }
+  ]
+}
